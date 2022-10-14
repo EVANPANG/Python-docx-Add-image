@@ -2,12 +2,21 @@ from dataclasses import dataclass
 import numpy as np
 
 import os
+import sys
 from docx import Document
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt
 
-local = os.path.abspath('test.py')[::-1]
-address = local.split("yp.tset")[1][::-1]
+address = sys.argv[1]
+sample = int(sys.argv[2])
+quantity = int(sys.argv[3])
+
+print(address)
+print(sample)
+print(quantity)
+RowCount = (sample * quantity)/2
+# local = os.path.abspath('test.py')[::-1]
+# address = local.split("yp.tset")[1][::-1]
 data = []
 doc = Document()
 doc.styles['Normal'].font.size = Pt(10.5)
@@ -21,7 +30,9 @@ def addTable(row, col):
 
 
 def walkFile(file):
-    table = addTable(1246, 2)
+    i = sample * quantity
+    row = i / 2
+    table = addTable(row, 2)
     count = 1
     x = 0
     y = 0
@@ -40,7 +51,7 @@ def walkFile(file):
                 if y == 1:
                     y = 0
                     x = x+1
-                    count = count+1
+                    count = count
                 else:
                     y = 1
 
@@ -50,9 +61,7 @@ def walkFile(file):
 
 def main():
 
-    walkFile(address+'image/')
-    doc.save(address + 'test.docx')
-    print(data)
-
+    walkFile(address)
+    # doc.save(address)
 
 main()

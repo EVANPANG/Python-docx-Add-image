@@ -1,9 +1,8 @@
-echo Thanks for use this program!
+@echo Thanks for use this program!
 
-set /p Address= Image Address
-@REM set /p Quantity = Quantity 
-@REM set /p Count = Count
+@set /p Address= Image Address 
+@set /p Sample= Sample 
+@set /p Quantity= Quantity 
 
-python Connect.py %Address% 
-@REM %Quantity% %Count%
+@python test.py %Address% %Quantity% %Sample%
 pause
