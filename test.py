@@ -11,10 +11,7 @@ address = sys.argv[1]
 sample = int(sys.argv[2])
 quantity = int(sys.argv[3])
 
-print(address)
-print(sample)
-print(quantity)
-RowCount = (sample * quantity)/2
+RowCount = (sample * quantity) / 2
 # local = os.path.abspath('test.py')[::-1]
 # address = local.split("yp.tset")[1][::-1]
 data = []
@@ -31,11 +28,12 @@ def addTable(row, col):
 
 def walkFile(file):
     i = sample * quantity
-    row = i / 2
+    row = int(i / 2)
     table = addTable(row, 2)
     count = 1
     x = 0
     y = 0
+    z = 1
     for root, dirs, files in os.walk(file):
         for f in files:
             try:
@@ -48,20 +46,25 @@ def walkFile(file):
                 print(f)
                 pic.add_break()
                 text.add_run('检材' + str(count) + '外观图')
+                if z < quantity:
+                    print(z)
+                    count = count
+                    z = z + 1
+                else:
+                    count = count + 1
+                    z = 1
                 if y == 1:
                     y = 0
-                    x = x+1
-                    count = count
+                    x = x + 1
                 else:
                     y = 1
-
             except:
-                return
+                print('fail')
 
 
 def main():
+    walkFile(address + '/')
+    doc.save(address + '/image.docx')
 
-    walkFile(address)
-    # doc.save(address)
 
 main()
