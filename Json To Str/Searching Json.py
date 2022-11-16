@@ -2,11 +2,7 @@ import demjson
 import xlwt
 import pandas as pd
 
-
-# def to_excel():
-
-
-def main():
+def try_excel():
     json_result = demjson.decode_file('data_case_info.json', encoding='utf-8')
     transform_list = list(json_result['contents'])
     pf = pd.DataFrame(transform_list)
@@ -16,4 +12,4 @@ def main():
     file_path.save()
 
 
-main()
+try_excel()
