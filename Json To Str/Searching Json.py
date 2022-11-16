@@ -1,15 +1,19 @@
 import demjson
 import xlwt
+import pandas as pd
 
 
-def test_page():
-    txt_file = open('D:/Python-docx-Add-Image/Json To Str/text.txt', 'w')
-    result = demjson.decode_file('data_case_info.json', encoding='utf-8')
-    txt_file.write(str(result))
+# def to_excel():
 
 
 def main():
-    test_page()
+    json_result = demjson.decode_file('data_case_info.json', encoding='utf-8')
+    transform_list = list(json_result['contents'])
+    pf = pd.DataFrame(transform_list)
+    print(pf)
+    file_path = pd.ExcelWriter('name.xlsx')
+    pf.to_excel(file_path, encoding='utf-8')
+    file_path.save()
 
 
 main()
